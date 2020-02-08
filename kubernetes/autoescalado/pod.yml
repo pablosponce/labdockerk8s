@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: php-apache
+  name: php-apache
+spec:
+  containers:
+  - image: k8s.gcr.io/hpa-example
+    imagePullPolicy: Always
+    name: php-apache
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 500m
+      requests:
+        cpu: 200m
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-btswz
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: docker-desktop
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-btswz
+    secret:
+      defaultMode: 420
+      secretName: default-token-btswz
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2020-02-07T15:13:47Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2020-02-07T15:14:30Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2020-02-07T15:14:30Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2020-02-07T15:13:47Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://bcba125739b2092473124c645f85df4169d8121ca332cd5c8e9f87974b72bac1
+    image: k8s.gcr.io/hpa-example:latest
+    imageID: docker-pullable://k8s.gcr.io/hpa-example@sha256:581697a37f0e136db86d6b30392f0db40ce99c8248a7044c770012f4e8491544
+    lastState: {}
+    name: php-apache
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: "2020-02-07T15:14:30Z"
+  hostIP: 192.168.65.3
+  phase: Running
+  podIP: 10.1.0.14
+  qosClass: Burstable
+  startTime: "2020-02-07T15:13:47Z"
