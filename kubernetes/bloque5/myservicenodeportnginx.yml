@@ -12,4 +12,4 @@ spec:
       nodePort: 31443
       name: https
   selector:
-    name: my-nginx
+    app: my-nginx

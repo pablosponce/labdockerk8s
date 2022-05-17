@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: my-securitycontext-pod
+  name: my-securitycontext-pod3
 spec:
   securityContext:
     runAsUser: 2000

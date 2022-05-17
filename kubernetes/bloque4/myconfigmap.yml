@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
    name: myconfigmap
 data:
-   verbose: '4'
+   verbose: '6'
    usuario: www-data
    dept: rrhh
